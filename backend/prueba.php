@@ -1,5 +1,3 @@
-<html>
-  <body>
     <?php
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -37,10 +35,9 @@
 
       $res = mysqli_query($con,"SELECT * FROM pokemon WHERE id=$id");
       $arr = $res->fetch_array();
-      array_push ($arr, "id");
-      $array = array("type" => "id", "ID" => $arr[0], "Nombre" => $arr[1], "Tipo 1" => $arr[2], "Tipo 2" => $arr[3], "Generacion" => $arr[4], "Descripcion" => $arr[5], "Altura" => $arr[6], "Peso" => $arr[7], "Imagen" => $arr[8], "Miniatura" => $arr[9]);
-      echo json_encode($arr,JSON_FORCE_OBJECT);
-
+      $array = array("type" => "id", "data" => $arr);
+      echo json_encode($array,JSON_FORCE_OBJECT);
+//
       // echo "<table>";
       // $int =  $arr[0];
       // $nomb = $arr[1];
@@ -74,12 +71,12 @@
       $consulta = "SELECT * FROM  `pokemon` WHERE  `NOMBRE` LIKE  '%$name%'";
 
         if ($resultado = $mysqli->query($consulta)) {
-          $array = array("type" => "name");
+          $arr = array();
            while ($fila = $resultado->fetch_row()) {
-             $num = $fila[0];
-             array_push($array,[$fila[0], $fila[1]]); // AÑADIR LINKS A IMAGENES.
+             array_push($arr,[$fila[0], $fila[1],$fila[9]]);
            }
-           echo json_encode($array);
+           $array = array("type" => "name", "data" => $arr);
+           echo json_encode($array,JSON_FORCE_OBJECT);
 
             /* liberar el conjunto de resultados */
             $resultado->close();
@@ -93,6 +90,3 @@
     //  }
     }
   ?>
-
-  </body>
-</html>
