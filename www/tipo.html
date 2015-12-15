@@ -1,111 +1,92 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-        <title>Buscar por Nombre</title>
-    </head>
-    <body>
-      <div data-role="page">
-        <div data-role="panel" id="Buscar" data-theme="b">
-          <h1>Pokemon</h1>
-          <div id="tabla">
-          </div>
+<head>
+  <meta charset="utf-8"/>
+    <title>Práctica de Reconocimiento del Habla</title>
+</head>
+<body>
+    <h2>Práctica de Reconocimiento del Habla</h2>
+    <section>
+        <textarea id="areaResult"></textarea>
+        <textarea id="finalTranscript"></textarea>
+        <img id=mic src="img/logo.png"/>
+    </section>
+    <script>
 
-        </div>
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = "es-ES";
 
-        <div  data-role="main" class="ui-content">
-          <h1>Buscar por Tipo:</h1>
-          <ul data-role="listview">
-            <input type="text" id="input" placeholder="tipo" value="1">
-            <textarea id="areaResult"></textarea>
-            <textarea id="finalTranscript"></textarea>
-            <li><a href="#Buscar" onclick="choosePokemonBy('type')">
-              <img id=mic src="img/micro.png" alt="Activar Micrófono." />
-            </a></li>
-            <li><a href="index.html" data-rel="back">Volver</a></li>
-          </ul>
-        </div>
-      </div>
-      <script>
-      window.onload = function () {
+      mic.addEventListener('click', function () {
+        console.log("DENTRO");
+        areaResult.focus();
+        recognition.start();
+      });
 
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = "es-ES";
+      //events
 
-        mic.addEventListener('click', function () {
-          areaResult.focus();
-          recognition.start();
-        });
-
-        //events
-
-        recognition.onaudiostart = function (event) {
+      recognition.onaudiostart = function (event) {
           console.log("onaudiostart");
-        };
+      };
 
-        recognition.onsoundstart = function (event) {
+      recognition.onsoundstart = function (event) {
           console.log("onsoundstart");
-        };
+      };
 
-        recognition.onspeechstart = function (event) {
+      recognition.onspeechstart = function (event) {
           console.log("onspeechstart");
-        };
+      };
 
-        recognition.onspeechend = function (event) {
+      recognition.onspeechend = function (event) {
           console.log("onspeechend");
-        };
+      };
 
-        recognition.onsoundend = function (event) {
+      recognition.onsoundend = function (event) {
           console.log("onsoundend");
 
-        };
+      };
 
-        recognition.onaudioend = function (event) {
+      recognition.onaudioend = function (event) {
           console.log("onaudioend");
 
-        };
+      };
 
-        recognition.onresult = function (event) {
-        var interimResult = '',
-        finalResult = '';
-        for (var i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalResult = event.results[i][0].transcript;
-          } else {
-            interimResult += event.results[i][0].transcript;
+      recognition.onresult = function (event) {
+          console.log("onresult");
+          var interimResult = '',
+              finalResult = '';
+          for (var i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                  finalResult = event.results[i][0].transcript;
+              } else {
+                  interimResult += event.results[i][0].transcript;
+              }
           }
-        }
 
-        finalTranscript.value = finalResult;
+          finalTranscript.value = finalResult;
+          areaResult.value = interimResult;
 
-        if (interimResult.indexOf('cerrar') == 1 || interimResult.indexOf('cerrar') == 0)
-          recognition.stop();
-        };
+          if (interimResult.indexOf('cerrar') == 1 || interimResult.indexOf('cerrar') == 0)
+              recognition.stop();
+      };
 
-        recognition.onnomatch = function (event) {
+      recognition.onnomatch = function (event) {
           console.log("onnomatch");
-        };
+      };
 
-        recognition.onerror = function (event) {
+      recognition.onerror = function (event) {
           console.log("onerror: " + event);
           console.log(event);
-        };
-
-        recognition.onstart = function (event) {
-          console.log("onstart");
-        };
-
-        recognition.onend = function (event) {
-          console.log("onend");
-        };
       };
-      </script>
 
-    </body>
+      recognition.onstart = function (event) {
+          console.log("onstart");
+      };
+
+      recognition.onend = function (event) {
+          console.log("onend");
+      };
+    </script>
+</body>
 </html>
