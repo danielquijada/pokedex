@@ -3,6 +3,13 @@ var prevX = 0;
 var firstTime = true;
 var audio_pokemon;
 //-----------------------
+
+document.addEventListener("deviceready", onDeviceReady, false);
+var isDeviceReady = false;
+function onDeviceReady () {
+  isDeviceReady = true;
+}
+
 var pokedex = {
     // Application Constructor
     initialize: function() {
@@ -45,6 +52,25 @@ function choosePokemonBy(tipo) {
 };
 
 var optionsAccelerometer = {frequency: 200};
+var optionsCompass = {frequency: 1000};
+
+function startCircle () {
+  var element = document.getElementById('tabla');
+  element.innerHTML = 'Starting';
+  // navigator.compass.watchHeading(compassSuccess,compassError,optionsCompass);
+  var gch = navigator.compass.watchHeading (compassSuccess,compassError,optionsCompass);
+  element.innerHTML += '\nEnding';
+}
+
+function compassSuccess(heading) {
+  alert ("Compass: " + heading.magneticHeading.toFixed(1));
+    // alert("Heading: " + heading.trueHeading. " at " + heading.timestamp);
+};
+
+function compassError(compassError) {
+  alert ("Compass Error");
+    // alert('Compass error: ' + compassError.code);
+};
 
 function onSuccessAccelerometer(acceleration) {
   if((acceleration.x - prevX < -7 || acceleration.x - prevX > 7) && firstTime == false) {
@@ -148,8 +174,9 @@ function showById (datos) {
       audio_pokemon = audio;
   }
 
-  document.addEventListener("deviceready", onDeviceReady, false);
-  function onDeviceReady () {
+  if (isDeviceReady)
     navigator.accelerometer.watchAcceleration(onSuccessAccelerometer, onErrorAccelerometer, optionsAccelerometer);
+  else {
+    alert ("Error!");
   }
 }
