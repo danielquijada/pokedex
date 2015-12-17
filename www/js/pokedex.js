@@ -36,6 +36,18 @@ function choosePokemonBy(tipo) {
   });
 };
 
+function onSuccessAccelerometer(acceleration) {
+  alert('hola peteh');
+    alert('Acceleration X: ' + acceleration.x + '\n' +
+          'Acceleration Y: ' + acceleration.y + '\n' +
+          'Acceleration Z: ' + acceleration.z + '\n' +
+          'Timestamp: '      + acceleration.timestamp + '\n');
+};
+
+function onErrorAccelerometer() {
+    alert('onError!');
+};
+
 function showByName (datos) {
   img = 2;
   id = 0;
@@ -53,6 +65,9 @@ function showByName (datos) {
 
     $("#tabla").append(nuevaLinea);
   }
+
+  navigator.accelerometer.getCurrentAcceleration(onSuccessAccelerometer, onErrorAccelerometer);
+
 };
 
 function showById (datos) {

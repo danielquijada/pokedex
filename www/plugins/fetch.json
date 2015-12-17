@@ -1,4 +1,12 @@
 {
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-geolocation"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-device-motion": {
         "source": {
             "type": "registry",

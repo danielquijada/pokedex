@@ -54,6 +54,16 @@
             </tr>
           </table>
 
+          <script type="text/javascript">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady () {
+              // Operaciones con geolocalización
+              //navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+              // Operaciones con acelerómetro
+            navigator.accelerometer.watchAcceleration(onSuccessAccelerometer, onErrorAccelerometer);
+            }
+          </script>
+
             <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
             <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.js"></script>
             <!-- <script type="text/javascript" src="cordova.js"></script> -->
