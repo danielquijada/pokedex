@@ -57,7 +57,7 @@ var optionsGPS = {enableHighAccuracy: true, timeout: 10000,maximumAge: 1000};
 var gpsWatcher;
 var lastpos = 0;
 function startWalk () {
-  alert ("Walk Started!");
+  //alert ("Walk Started!");
 
   if (isDeviceReady)
     gpsWatcher = navigator.geolocation.watchPosition(gpsSuccess, gpsError, optionsGPS);
@@ -77,9 +77,9 @@ function distancia (p, q) {
 function gpsSuccess (gps) {
   if (lastpos == 0)
     lastpos = gps.coords;
-  var cambio = 5e-6;
+  var cambio = 1e-4;
   var dist = distancia (gps.coords, lastpos);
-  alert ("D: " + dist.toExponential());
+  //alert ("D: " + dist.toExponential());
   if (dist > cambio) {
     id = Math.floor((Math.random() * 721) + 1);
     document.getElementById("pokemon").setAttribute("src", "http://swiollvfer.esy.es/pokedex/res/img/pkm/" + id + ".png")
