@@ -44,18 +44,6 @@ function choosePokemonBy(tipo) {
   });
 };
 
-function recognizeSpeech() {
-    var maxMatches = 5;
-    var promptString = "Habla ahora (ingles)"; // optional
-    var language = "en-US";                     // optional
-    window.plugins.speechrecognizer.startRecognize(function(result){
-        document.getElementById('input').value = result;
-        choosePokemonBy('type');
-    }, function(errorMessage){
-        console.log("Error message: " + errorMessage);
-    }, maxMatches, promptString, language);
-};
-
 var optionsAccelerometer = {frequency: 200};
 
 function onSuccessAccelerometer(acceleration) {

@@ -23,20 +23,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.phonegap.plugins.speech": {
+    "cordova-plugin-device-orientation": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/poiuytrez/SpeechRecognizer",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "org.apache.cordova.speech.speechrecognition": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/macdonst/SpeechRecognitionPlugin",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-device-orientation"
         },
         "is_top_level": true,
         "variables": {}
