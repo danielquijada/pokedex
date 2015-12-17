@@ -1,3 +1,8 @@
+//variables acelerometro
+var prevX = 0;
+var firstTime = true;
+var audio_pokemon;
+//-----------------------
 var pokedex = {
     // Application Constructor
     initialize: function() {
@@ -36,12 +41,19 @@ function choosePokemonBy(tipo) {
   });
 };
 
+var optionsAccelerometer = {frequency: 200};
+
 function onSuccessAccelerometer(acceleration) {
-  alert('hola peteh');
-    alert('Acceleration X: ' + acceleration.x + '\n' +
-          'Acceleration Y: ' + acceleration.y + '\n' +
-          'Acceleration Z: ' + acceleration.z + '\n' +
-          'Timestamp: '      + acceleration.timestamp + '\n');
+  if((acceleration.x - prevX < -7 || acceleration.x - prevX > 7) && firstTime == false) {
+      audio_pokemon.play();
+  }
+
+  prevX = acceleration.x;
+
+  // Controlamos que sea la primera ejecucicón para darle un valor a prevX
+  if(firstTime == true) {
+    firstTime = false;
+  }
 };
 
 function onErrorAccelerometer() {
@@ -65,8 +77,6 @@ function showByName (datos) {
 
     $("#tabla").append(nuevaLinea);
   }
-
-  navigator.accelerometer.getCurrentAcceleration(onSuccessAccelerometer, onErrorAccelerometer);
 
 };
 
@@ -106,4 +116,16 @@ function showById (datos) {
 
   $("#altura").append(" m");
   $("#peso").append(" Kg");
+
+  var audio = document.createElement("audio");
+  if (audio != null && audio.canPlayType && audio.canPlayType("audio/ogg"))
+  {
+      audio.src = datos[10];
+      audio_pokemon = audio;
+  }
+
+  document.addEventListener("deviceready", onDeviceReady, false);
+  function onDeviceReady () {
+    navigator.accelerometer.watchAcceleration(onSuccessAccelerometer, onErrorAccelerometer, optionsAccelerometer);
+  }
 }

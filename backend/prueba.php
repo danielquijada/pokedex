@@ -23,7 +23,7 @@
       if ($id == "") {
         $id = 130;
       }
-      $data = ["ID", "Nombre", "Tipo 1", "Tipo 2", "Generacion", "Descripcion", "Altura", "Peso", "Imagen", "Miniatura"];
+      $data = ["ID", "Nombre", "Tipo 1", "Tipo 2", "Generacion", "Descripcion", "Altura", "Peso", "Imagen", "Miniatura", "Sonido"];
 
       $con = mysqli_connect("mysql.hostinger.es","u439733712_swiol","17091991","u439733712_pokem");
 
