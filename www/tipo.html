@@ -6,7 +6,7 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-        <title>Buscar por Nombre</title>
+        <title>Buscar por Tipo</title>
     </head>
     <body>
       <div data-role="page">
@@ -18,13 +18,28 @@
         </div>
 
         <div  data-role="main" class="ui-content">
-          <h1>Buscar por Nombre:</h1>
+          <h1>Buscar por tipo:</h1>
           <ul data-role="listview">
-            <input type="text" id="input" placeholder="Nombre del pokemon" value="Gyarados">
-            <li><a href="#Buscar" onclick="choosePokemonBy('name')">Buscar</a></li>
+            <input type="text" id="input" placeholder="Nombre del pokemon" value="water">
+            <input type="button" value="Pulsa para hablar" onclick="recognition.start()">
+            <li><a href= "#Buscar">Ver</a></li>
             <li><a href="index.html" data-rel="back">Volver</a></li>
           </ul>
         </div>
       </div>
+      <script type="text/javascript">
+        var recognition;
+        document.addEventListener('deviceready', onDeviceReady, false);
+
+        function onDeviceReady() {
+            recognition = new SpeechRecognition();
+            recognition.onresult = function(event) {
+                if (event.results.length > 0) {
+                    input.value = event.results[0][0].transcript;
+                    choosePokemonBy('type');
+                }
+            }
+        }
+      </script>
     </body>
 </html>

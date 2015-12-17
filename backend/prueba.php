@@ -13,6 +13,9 @@
       case 'name':
         searchByName($data);
         break;
+      case 'type':
+        searchByType($data);
+        break;
 
       default:
         searchByID($data);
@@ -69,6 +72,32 @@
       $mysqli = new mysqli("mysql.hostinger.es","u439733712_swiol","17091991","u439733712_pokem");
 
       $consulta = "SELECT * FROM  `pokemon` WHERE  `NOMBRE` LIKE  '%$name%'";
+
+        if ($resultado = $mysqli->query($consulta)) {
+          $arr = array();
+           while ($fila = $resultado->fetch_row()) {
+             array_push($arr,[$fila[0], $fila[1],$fila[9]]);
+           }
+           $array = array("type" => "name", "data" => $arr);
+           echo json_encode($array,JSON_FORCE_OBJECT);
+
+            /* liberar el conjunto de resultados */
+            $resultado->close();
+        }
+
+    //  $con = mysqli_connect("mysql.hostinger.es","u439733712_swiol","17091991","u439733712_pokem");
+    //  $res = mysqli_query($con,"SELECT * FROM pokemon WHERE nombre LIKE %$name%");
+
+    //  while ($fila = $res->fetch_row()) {
+    //      printf ("%s (%s)\n", $fila[0], $fila[1]);
+    //  }
+    }
+
+    function searchByType($tipo) {
+
+      $mysqli = new mysqli("mysql.hostinger.es","u439733712_swiol","17091991","u439733712_pokem");
+
+      $consulta = "SELECT * FROM  `pokemon` WHERE  `TIPO1` LIKE  '%$tipo%' OR `TIPO2` LIKE  '%$tipo%'";
 
         if ($resultado = $mysqli->query($consulta)) {
           $arr = array();

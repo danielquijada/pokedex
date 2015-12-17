@@ -35,10 +35,25 @@ function choosePokemonBy(tipo) {
       case "id":
         showById(response.data);
         break;
+      case "type":
+        showByType(response.data);
+        break;
         default:
           console.log ("hola peteh :)")
     }
   });
+};
+
+function recognizeSpeech() {
+    var maxMatches = 5;
+    var promptString = "Habla ahora (ingles)"; // optional
+    var language = "en-US";                     // optional
+    window.plugins.speechrecognizer.startRecognize(function(result){
+        document.getElementById('input').value = result;
+        choosePokemonBy('type');
+    }, function(errorMessage){
+        console.log("Error message: " + errorMessage);
+    }, maxMatches, promptString, language);
 };
 
 var optionsAccelerometer = {frequency: 200};
@@ -46,6 +61,7 @@ var optionsAccelerometer = {frequency: 200};
 function onSuccessAccelerometer(acceleration) {
   if((acceleration.x - prevX < -7 || acceleration.x - prevX > 7) && firstTime == false) {
       audio_pokemon.play();
+      navigator.vibrate(500);
   }
 
   prevX = acceleration.x;
@@ -61,6 +77,26 @@ function onErrorAccelerometer() {
 };
 
 function showByName (datos) {
+  img = 2;
+  id = 0;
+  nombre = 1;
+
+  tabla = document.getElementById("tabla");
+
+  tabla.innerHTML = "";
+
+  for (i in datos) {
+    pokemon = datos[i];
+
+    nuevaLinea = "<div><img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + ">";
+    nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
+
+    $("#tabla").append(nuevaLinea);
+  }
+
+};
+
+function showByType (datos) {
   img = 2;
   id = 0;
   nombre = 1;
