@@ -10,20 +10,12 @@
     </head>
     <body>
       <div data-role="page">
-        <div data-role="panel" id="Buscar" data-theme="b">
-          <h1>Pokemon</h1>
-          <div id="tabla">
-          </div>
-
-        </div>
-
         <div  data-role="main" class="ui-content">
-          <h1>Buscar por Nombre:</h1>
-          <ul data-role="listview">
-            <input type="text" id="input" value="Gyarados">
-            <li><a href="#Buscar" onclick="startCircle ()">Buscar</a></li>
-            <li><a href="index.html" data-rel="back">Volver</a></li>
-          </ul>
+          <h1>Lucha!</h1>
+          <a href="index.html" data-rel="back" onclick="stopWalk()"><img id=pokemon alt=Lucha! src=https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG></img></a>
+          <script type="text/javascript">
+            startWalk ();
+          </script>
         </div>
       </div>
     </body>

@@ -53,6 +53,43 @@ function choosePokemonBy(tipo) {
 
 var optionsAccelerometer = {frequency: 200};
 var optionsCompass = {frequency: 1000};
+var optionsGPS = {enableHighAccuracy: true, timeout: 10000,maximumAge: 1000};
+var gpsWatcher;
+var lastpos = 0;
+function startWalk () {
+  alert ("Walk Started!");
+
+  if (isDeviceReady)
+    gpsWatcher = navigator.geolocation.watchPosition(gpsSuccess, gpsError, optionsGPS);
+
+}
+
+function stopWalk () {
+  navigator.geolocation.clearWatch(gpsWatcher);
+}
+
+function distancia (p, q) {
+  var d1 = p.latitude - q.latitude;
+  var d2 = p.longitude - q.longitude;
+  return Math.sqrt(Math.pow(d1, 2) + Math.pow (d2, 2));
+}
+
+function gpsSuccess (gps) {
+  if (lastpos == 0)
+    lastpos = gps.coords;
+  var cambio = 5e-6;
+  var dist = distancia (gps.coords, lastpos);
+  alert ("D: " + dist.toExponential());
+  if (dist > cambio) {
+    id = Math.floor((Math.random() * 721) + 1);
+    document.getElementById("pokemon").setAttribute("src", "http://swiollvfer.esy.es/pokedex/res/img/pkm/" + id + ".png")
+    lastpos = gps.coords;
+  }
+}
+
+function gpsError (error) {
+  alert ("Error GPS: " + error.code);
+}
 
 function startCircle () {
   var element = document.getElementById('tabla');
