@@ -31,7 +31,7 @@
     </head>
     <body>
       <div data-role="page" data-theme="a">
-        <div data-role="panel" id="Buscar" data-theme="b">
+        <div data-role="popup" id="Buscar" class="ui-content" data-theme="b">
           <h1>Pokémon</h1>
           <div id="tabla">
             <div><img style='vertical-align:middle; width: 80%; height: auto' id ="imagen"></div>            <table>
@@ -107,7 +107,7 @@
           <h1>Buscar por ID:</h1>
           <ul data-role="listview">
             <input type="text" id="input" placeholder="ID" value="1">
-            <li><a href="#Buscar" onclick="choosePokemonBy('id')">Buscar</a></li>
+            <li><a href="#Buscar" data-transition="turn" onclick="choosePokemonBy('id')" data-rel="popup">Buscar</a></li>
             <li><a href="index.html" onclick="stopShake()" data-rel="back">Volver</a></li>
           </ul>
         </div>
