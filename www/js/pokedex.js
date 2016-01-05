@@ -21,9 +21,16 @@ var pokedex = {
     },
 };
 var tabla;
+var input = "";
+
+function searchThisPokemon (id) {
+  input = id;
+  choosePokemonBy("id");
+}
 
 function choosePokemonBy(tipo) {
-  input = document.getElementById('input').value;
+  if (input == "")
+    input = document.getElementById('input').value;
   jsonarr = $.ajax({
        url:"http://swiollvfer.esy.es/pokedex/prueba.php",
        type: 'POST',
@@ -49,6 +56,7 @@ function choosePokemonBy(tipo) {
           console.log ("hola peteh :)")
     }
   });
+  input = "";
 };
 
 var optionsAccelerometer = {frequency: 200};
@@ -144,10 +152,18 @@ function showByName (datos) {
   for (i in datos) {
     pokemon = datos[i];
 
-    nuevaLinea = "<div><img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + ">";
+    modificadores = "id=" + pokemon[nombre];
+
+    // nuevaLinea = "<div><img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + ">";
+    // nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
+
+
+    nuevaLinea = "<a href='#BuscarPmkn' data-transition='flip' data-rel='popup' onclick='alert(\'hello\');'><div id=" + pokemon[nombre] + ">"
+    nuevaLinea +="<img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + "></a>";
     nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
 
     $("#tabla").append(nuevaLinea);
+    document.getElementById(pokemon[nombre]).addEventListener("click", searchThisPokemon(pokemon[id]));
   }
 
 };
