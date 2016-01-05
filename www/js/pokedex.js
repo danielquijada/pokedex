@@ -154,16 +154,12 @@ function showByName (datos) {
 
     modificadores = "id=" + pokemon[nombre];
 
-    // nuevaLinea = "<div><img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + ">";
-    // nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
-
-
     nuevaLinea = "<a href='#BuscarPkmn' data-transition='flip' data-rel='popup' onclick='searchThisPokemon(" + pokemon[id] + ");'><div id=" + pokemon[nombre] + ">"
     nuevaLinea +="<img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + "></a>";
     nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
 
     $("#tabla").append(nuevaLinea);
-    //document.getElementById(pokemon[nombre]).addEventListener("click", searchThisPokemon(pokemon[id]));
+
   }
 
 };
@@ -180,7 +176,10 @@ function showByType (datos) {
   for (i in datos) {
     pokemon = datos[i];
 
-    nuevaLinea = "<div><img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + ">";
+    modificadores = "id=" + pokemon[nombre];
+
+    nuevaLinea = "<a href='#BuscarPkmn' data-transition='flip' data-rel='popup' onclick='searchThisPokemon(" + pokemon[id] + ");'><div id=" + pokemon[nombre] + ">"
+    nuevaLinea +="<img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + "></a>";
     nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
 
     $("#tabla").append(nuevaLinea);

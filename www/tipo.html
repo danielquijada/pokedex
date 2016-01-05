@@ -14,7 +14,78 @@
           <h1>Pokemon</h1>
           <div id="tabla">
           </div>
+        </div>
 
+        <div data-role="popup" id="BuscarPkmn" class="ui-content" data-theme="b">
+          <h1>Pokémon</h1>
+          <div id="tabla">
+            <div><img style='vertical-align:middle; width: 80%; height: auto' id ="imagen" src="img/Pokeball.png"></div>            <table>
+              <tr>
+                <td>
+                  ID:
+                </td>
+                <td id="id">
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  NOMBRE:
+                </td>
+                <td id="nombre">
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  TIPO 1:
+                </td>
+                <td id="tipo1">
+
+                </td>
+              </tr>
+              <tr id="tipo2tr">
+                <td>
+                  TIPO 2:
+                </td>
+                <td id="tipo2">
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  GENERACION:
+                </td>
+                <td id="generacion">
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  DESCRIPCION:
+                </td>
+                <td id="descripcion">
+
+                </td>
+              </tr>
+              <tr id="alturatr">
+                <td>
+                  ALTURA:
+                </td>
+                <td id="altura">
+
+                </td>
+              </tr>
+              <tr id="pesotr">
+                <td>
+                  PESO:
+                </td>
+                <td id="peso">
+
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div  data-role="main" class="ui-content">
@@ -22,7 +93,7 @@
           <ul data-role="listview">
             <input type="text" id="input" placeholder="Nombre del pokemon" value="fire">
             <li><a href="#Buscar" onclick="choosePokemonBy('type')">Buscar</a></li>
-            <li><a href="index.html" data-rel="back">Volver</a></li>
+            <li><a href="index.html" onclick="stopShake()" data-rel="back">Volver</a></li>
           </ul>
         </div>
       </div>
