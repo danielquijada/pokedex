@@ -158,12 +158,12 @@ function showByName (datos) {
     // nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
 
 
-    nuevaLinea = "<a href='#BuscarPkmn' data-transition='flip' data-rel='popup' onclick='alert(\'hello\');'><div id=" + pokemon[nombre] + ">"
+    nuevaLinea = "<a href='#BuscarPkmn' data-transition='flip' data-rel='popup' onclick='searchThisPokemon(" + pokemon[id] + ");'><div id=" + pokemon[nombre] + ">"
     nuevaLinea +="<img style='vertical-align:middle; width: 40%; height: auto' src=" + pokemon[img] +" alt=" + pokemon[nombre] + "></a>";
     nuevaLinea += pokemon[id] + " " + pokemon[nombre] + "</div>";
 
     $("#tabla").append(nuevaLinea);
-    document.getElementById(pokemon[nombre]).addEventListener("click", searchThisPokemon(pokemon[id]));
+    //document.getElementById(pokemon[nombre]).addEventListener("click", searchThisPokemon(pokemon[id]));
   }
 
 };
