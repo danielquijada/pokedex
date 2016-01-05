@@ -55,6 +55,7 @@ var optionsAccelerometer = {frequency: 200};
 var optionsCompass = {frequency: 1000};
 var optionsGPS = {enableHighAccuracy: true, timeout: 10000,maximumAge: 1000};
 var gpsWatcher;
+var accelerometerWatcher;
 var lastpos = 0;
 function startWalk () {
   //alert ("Walk Started!");
@@ -66,6 +67,10 @@ function startWalk () {
 
 function stopWalk () {
   navigator.geolocation.clearWatch(gpsWatcher);
+}
+
+function stopShake () {
+  navigator.accelerometer.clearWatch(accelerometerWatcher);
 }
 
 function distancia (p, q) {
@@ -212,7 +217,7 @@ function showById (datos) {
   }
 
   if (isDeviceReady)
-    navigator.accelerometer.watchAcceleration(onSuccessAccelerometer, onErrorAccelerometer, optionsAccelerometer);
+    accelerometerWatcher = navigator.accelerometer.watchAcceleration(onSuccessAccelerometer, onErrorAccelerometer, optionsAccelerometer);
   else {
     alert ("Error!");
   }
